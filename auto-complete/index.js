@@ -35,7 +35,7 @@ exports.createAutoComplete = (words, prevRes = [], prevQuery = '') =>
       const queryLowCase = query.toLowerCase();
       
       while(startIdx <= stopIdx) {
-        const substringLowCase = words[middle].toLowerCase().substring(0, queryLowCase.length);
+        const substringLowCase = words[middle].toLowerCase().slice(0, query.length);
         if (substringLowCase >= queryLowCase) stopIdx = middle - 1;
         else startIdx = middle + 1;
         middle = Math.floor((stopIdx + startIdx) / 2);
@@ -56,7 +56,7 @@ exports.createAutoComplete = (words, prevRes = [], prevQuery = '') =>
       const queryLowCase = query.toLowerCase();
         
       while(startIdx <= stopIdx) {
-        const substringLowCase = words[middle].toLowerCase().substring(0, queryLowCase.length);
+        const substringLowCase = words[middle].toLowerCase().slice(0, query.length);
         if (substringLowCase > queryLowCase) stopIdx = middle - 1;
         else startIdx = middle + 1;
         middle = Math.floor((stopIdx + startIdx) / 2);
