@@ -24,56 +24,49 @@ exports.createAutoComplete = (words, prevRes = [], prevQuery = '') =>
 
     /**
      * Find the index of the first entry, that starts with the given substring.
-     * @param {array} items - The dictionary.
-     * @param {string} subs - The given substring (query).
+     * @param {array} words - The dictionary.
+     * @param {string} query - The given query.
      * @returns {number}
      */
-    const findFirstEntryIdx = (items, subs) => {
+    const findFirstEntryIdx = (words, query) => {
       let startIdx  = 0;
-      let stopIdx = items.length - 1;
+      let stopIdx = words.length - 1;
       let middle = Math.floor((stopIdx + startIdx) / 2);
-      const subsLC = subs.toLowerCase();
+      const queryLowCase = query.toLowerCase();
       
-      while(startIdx < stopIdx) {
-        const itemSubsLC = items[middle].toLowerCase().substring(0, subsLC.length);
-        if (itemSubsLC >= subsLC) stopIdx = middle - 1;
+      while(startIdx <= stopIdx) {
+        const substringLowCase = words[middle].toLowerCase().substring(0, queryLowCase.length);
+        if (substringLowCase >= queryLowCase) stopIdx = middle - 1;
         else startIdx = middle + 1;
         middle = Math.floor((stopIdx + startIdx) / 2);
       }
-      return items[middle] && items[middle].toLowerCase().startsWith(subsLC)
-        ? middle
-        : ++middle;
-    };
+      return ++middle;
+  };
 
     /**
      * Find the index of the last entry, that starts with the given substring.
-     * @param {array} items - The dictionary.
-     * @param {string} subs - The given substring (query).
+     * @param {array} words - The dictionary.
+     * @param {string} query - The given query.
+     * @param {number} startIdx - The search start index.
      * @returns {number}
      */
-    const findLastEntryIdx = (items, subs) => {
-      let startIdx  = 0;
-      let stopIdx = items.length - 1;
+    const findLastEntryIdx = (words, query, startIdx = 0) => {
+      let stopIdx = words.length - 1;
       let middle = Math.floor((stopIdx + startIdx) / 2);
-      const subsLC = subs.toLowerCase();
-      
-      while(startIdx < stopIdx) {
-        const itemSubsLC = items[middle].toLowerCase().substring(0, subsLC.length);
-        if (itemSubsLC > subsLC) stopIdx = middle - 1;
+      const queryLowCase = query.toLowerCase();
+        
+      while(startIdx <= stopIdx) {
+        const substringLowCase = words[middle].toLowerCase().substring(0, queryLowCase.length);
+        if (substringLowCase > queryLowCase) stopIdx = middle - 1;
         else startIdx = middle + 1;
         middle = Math.floor((stopIdx + startIdx) / 2);
       }
-      return items[middle].toLowerCase().startsWith(subsLC)
-        ? middle
-        : --middle;
+      return ++middle;
     };
 
-    const queryLC = query.toLowerCase();
     const fistEntryIdx = findFirstEntryIdx(words, query);
-    const lastEntryIdx = findLastEntryIdx(words, query);
-    const result = words.length > 2
-      ? words.slice(fistEntryIdx, lastEntryIdx + 1)
-      : words.filter(word => word.toLowerCase().startsWith(queryLC));
+    const lastEntryIdx = findLastEntryIdx(words, query, fistEntryIdx);
+    const result = words.slice(fistEntryIdx, lastEntryIdx);
 
     prevQuery = query;
     prevRes = result;
