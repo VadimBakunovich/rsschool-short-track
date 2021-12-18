@@ -39,3 +39,68 @@ BaseBuilder.prototype.get = function() {
   this.lazyCalls = [];
   return this.value;
 }
+
+function StringBuilder(str) {
+  str = str || '';
+  BaseBuilder.checkStringInput([str]);
+  BaseBuilder.call(this, str);
+}
+
+StringBuilder.checkPositiveIntegerInput = function(arg) {
+  if (!Number.isInteger(arg) || arg <= 0) {
+    throw new Error('The input value must be a positive integer');
+  }
+}
+
+StringBuilder.prototype = Object.create(BaseBuilder.prototype);
+StringBuilder.prototype.constructor = StringBuilder;
+
+StringBuilder.prototype.minus = function(numChars) {
+	var lazyEval = function() {
+		StringBuilder.checkPositiveIntegerInput(numChars);
+    var endIndex = this.value.length - numChars;
+    this.value = this.value.slice(0, endIndex);
+  }
+  this.lazyCalls.push(lazyEval.bind(this));
+  return this;
+}
+
+StringBuilder.prototype.multiply = function(numRepetitions) {
+	var lazyEval = function() {
+		StringBuilder.checkPositiveIntegerInput(numRepetitions);
+    var result = '';
+    while (numRepetitions--) result += this.value;
+    this.value = result;
+  }
+  this.lazyCalls.push(lazyEval.bind(this));
+  return this;
+}
+
+StringBuilder.prototype.divide = function(divider) {
+	var lazyEval = function() {
+    StringBuilder.checkPositiveIntegerInput(divider);
+    var endIndex = Math.floor(this.value.length / divider);
+    this.value = this.value.slice(0, endIndex);
+  }
+  this.lazyCalls.push(lazyEval.bind(this));
+  return this;
+}
+
+StringBuilder.prototype.remove = function(substring) {
+	var lazyEval = function() {
+    BaseBuilder.checkStringInput([substring]);
+    this.value = this.value.split(substring).join('');
+  }
+  this.lazyCalls.push(lazyEval.bind(this));
+  return this;
+}
+
+StringBuilder.prototype.sub = function(from, n) {
+	var lazyEval = function() {
+    if (from !== 0) StringBuilder.checkPositiveIntegerInput(from);
+    StringBuilder.checkPositiveIntegerInput(n);
+    this.value = this.value.slice(from, from + n);
+  }
+  this.lazyCalls.push(lazyEval.bind(this));
+  return this;
+}
