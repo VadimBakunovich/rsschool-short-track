@@ -159,3 +159,5 @@ class IntBuilder extends BaseBuilder {
     return this;
   }
 }
+
+export { StringBuilder, IntBuilder };
