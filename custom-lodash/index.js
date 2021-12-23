@@ -44,5 +44,16 @@ class CustomLodash {
 
   identity = value => value;
   
+  dropWhile(arr, predicate = this.identity) {
+    return (arr && arr.length)
+      ? this.arrWhile(arr, predicate)
+      : [];
+  }
+
+  take(arr, n = 1) {
+    if (n < 0) n = 0;
+    return this.arrSlice(arr, 0, n);
+  }
+
   
 }
