@@ -182,5 +182,13 @@ class CustomLodash {
     return resultObj;
   }
 
-  
+  omitBy(obj, predicate) {
+    return this.omitBy_pickBy(obj, predicate, true);
+  }
+
+  pickBy(obj, predicate) {
+    return this.omitBy_pickBy(obj, predicate, false);
+  }
+
+  toPairs = obj => Object.entries(obj);
 }
