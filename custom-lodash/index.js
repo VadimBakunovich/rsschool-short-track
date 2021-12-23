@@ -190,7 +190,12 @@ class CustomLodash {
     return this.omitBy_pickBy(obj, predicate, false);
   }
 
-  toPairs = obj => Object.entries(obj);
+  toPairs(obj) {
+    if (obj instanceof Map || obj instanceof Set) {
+      return Object.entries(Object.fromEntries(obj));
+    }
+    return Object.entries(obj);
+  }
 }
 
 export const _ = new CustomLodash();
