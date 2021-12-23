@@ -152,5 +152,23 @@ class CustomLodash {
     return obj;
   }
 
+  omit(obj, keys) {
+    const resultObj = {};
+    if (typeof keys === 'string') keys = [keys];
+    for (const key in obj) {
+      if (!this.includes(keys, key)) resultObj[key] = obj[key];
+    }
+    return resultObj;
+  }
+
+  pick(obj, keys) {
+    const resultObj = {};
+    if (typeof keys === 'string') keys = [keys];
+    for (const key of keys) {
+      resultObj[key] = obj[key];
+    }
+    return resultObj;
+  }
+
   
 }
