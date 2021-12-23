@@ -34,5 +34,15 @@ class CustomLodash {
     return this.arrSlice(arr, n, arr.length);
   }
 
+  arrWhile(arr, predicate) {
+    let idx = 0;
+    for (; idx < arr.length; idx++) {
+      if (!predicate(arr[idx], idx, arr)) break;
+    }
+    return this.arrSlice(arr, idx, arr.length);
+  }
+
+  identity = value => value;
+  
   
 }
