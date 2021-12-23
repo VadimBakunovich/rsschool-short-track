@@ -124,5 +124,20 @@ class CustomLodash {
     return resultArr;
   }
 
+  zip(...arrays) {
+    let resultArr = [];
+    let maxLength = arrays[0].length;
+    for (let idx = 1; idx < arrays.length; idx++) {
+      maxLength = Math.max(maxLength, arrays[idx].length);
+    }
+    for (let i = 0; i < maxLength; i++) {
+      resultArr[i] = [];
+      for (let j = 0; j < arrays.length; j++) {
+        this.arrPush(resultArr[i], arrays[j][i]);
+      }
+    }
+    return resultArr;
+  }
+
   
 }
