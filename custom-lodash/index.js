@@ -192,3 +192,5 @@ class CustomLodash {
 
   toPairs = obj => Object.entries(obj);
 }
+
+export const _ = new CustomLodash();
