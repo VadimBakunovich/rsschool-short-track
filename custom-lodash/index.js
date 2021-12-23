@@ -55,5 +55,27 @@ class CustomLodash {
     return this.arrSlice(arr, 0, n);
   }
 
+  getValue = key => obj => obj[key];
+
+  matchObj = srcObj => obj => {
+    for (const key in srcObj) {
+      if (obj[key] !== srcObj[key]) return false;
+    }
+    return true;
+  }
+
+  matchObjValue = (key, value) => obj => obj[key] !== value ? false : true;
+
+  iteratee(value) {
+    if (!value) return this.identity;
+    if (typeof value === 'function') return value;
+    if (typeof value === 'object') {
+      return Array.isArray(value)
+        ? this.matchObjValue(value[0], value[1])
+        : this.matchObj(value);
+    }
+    return this.getValue(value);
+  }
+
   
 }
