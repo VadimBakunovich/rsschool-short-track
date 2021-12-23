@@ -98,5 +98,20 @@ class CustomLodash {
     return this.findArrElem(arr, predicate, fromIdx);
   }
 
+  includes(collection, value, fromIdx = 0) {
+    if (typeof collection === 'string') {
+      const regExp = new RegExp(value);
+      return regExp.test(collection);
+    } else if (collection instanceof Object) {
+      collection = Object.values(collection);
+    }
+    const length = collection.length;
+    if (fromIdx < 0) fromIdx = Math.max(length + fromIdx, 0);
+    for (let idx = fromIdx; idx < length; idx++) {
+      if (collection[idx] === value) return true;
+    }
+    return false;
+  }
 
+  
 }
