@@ -77,5 +77,17 @@ class CustomLodash {
     return this.getValue(value);
   }
 
+  findArrElem(arr, predicate = this.identity, fromIdx) {
+    const resultArr = [];
+    let idx = fromIdx ? fromIdx : 0;
+    for (; idx < arr.length; idx++) {
+      if (predicate(arr[idx], idx, arr)) {
+        if (fromIdx !== undefined) return arr[idx];
+        this.arrPush(resultArr, arr[idx]);
+      }
+    }
+    return resultArr;
+  }
+
   
 }
