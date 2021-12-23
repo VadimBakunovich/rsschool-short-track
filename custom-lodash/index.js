@@ -139,5 +139,18 @@ class CustomLodash {
     return resultArr;
   }
 
+  merge(obj = {}, ...sources) {
+    for (const src of sources) {
+      for (const key in src) {
+        if (key in obj) {
+          typeof obj[key] === "object"
+            ? this.merge(obj[key], src[key])
+            : obj[key] = src[key];
+        } else obj[key] = src[key];
+      }
+    }
+    return obj;
+  }
+
   
 }
