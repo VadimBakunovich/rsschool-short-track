@@ -113,5 +113,16 @@ class CustomLodash {
     return false;
   }
 
+  map(collection, predicate = this.identity) {
+    const resultArr = [];
+    if (collection instanceof Object) {
+      collection = Object.values(collection);
+    }
+    for (let idx = 0; idx < collection.length; idx++) {
+      resultArr[idx] = predicate(collection[idx], idx, collection);
+    }
+    return resultArr;
+  }
+
   
 }
