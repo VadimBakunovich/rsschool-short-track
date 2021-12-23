@@ -89,5 +89,14 @@ class CustomLodash {
     return resultArr;
   }
 
-  
+  filter(arr, predicate = this.identity) {
+    return this.findArrElem(arr, this.iteratee(predicate));
+  }
+
+  find(arr, predicate = this.identity, fromIdx = 0) {
+    if (fromIdx < 0) fromIdx = 0;
+    return this.findArrElem(arr, predicate, fromIdx);
+  }
+
+
 }
