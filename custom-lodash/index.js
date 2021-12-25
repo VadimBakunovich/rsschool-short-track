@@ -192,7 +192,7 @@ class CustomLodash {
 
   toPairs(obj) {
     if (obj instanceof Map || obj instanceof Set) {
-      return Object.entries(Object.fromEntries(obj));
+      return Object.entries(Object.fromEntries(obj.entries()));
     }
     return Object.entries(obj);
   }
