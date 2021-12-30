@@ -4,12 +4,12 @@
  */
 /**
  * Create function autocomplete.
- * @param {array} words - The dictionary.
+ * @param {array} data - The dictionary.
  * @param {array} prevRes - Previous search result.
  * @param {string} prevQuery - Previous query.
  * @returns {function}
  */
-exports.createAutoComplete = (words, prevRes = [], prevQuery = '') => 
+exports.createAutoComplete = (data, prevRes = [], prevQuery = '') => 
 
   /**
    * Find all items starting with a query.
@@ -20,52 +20,34 @@ exports.createAutoComplete = (words, prevRes = [], prevQuery = '') =>
 
     if (!query) return [];
     if (prevQuery === query) return prevRes;
-    if (prevQuery && query.startsWith(prevQuery)) words = prevRes;
+    
+    const words = prevQuery && query.startsWith(prevQuery) ? prevRes : data;
 
     /**
-     * Find the index of the first entry, that starts with the given substring.
+     * Find the index of the first(last) entry, that starts with the given substring.
      * @param {array} words - The dictionary.
      * @param {string} query - The given query.
+     * @param {boolean} isFirst - The type of index to look for (true: first, false: last).
      * @returns {number}
      */
-    const findFirstEntryIdx = (words, query) => {
-      let startIdx  = 0;
+    const findEntryIdx = (words, query, isFirst) => {
+      let startIdx = 0;
       let stopIdx = words.length - 1;
       let middle = Math.floor((stopIdx + startIdx) / 2);
       const queryLowCase = query.toLowerCase();
       
       while(startIdx <= stopIdx) {
         const substringLowCase = words[middle].toLowerCase().slice(0, query.length);
-        if (substringLowCase >= queryLowCase) stopIdx = middle - 1;
-        else startIdx = middle + 1;
-        middle = Math.floor((stopIdx + startIdx) / 2);
-      }
-      return ++middle;
-  };
-
-    /**
-     * Find the index of the last entry, that starts with the given substring.
-     * @param {array} words - The dictionary.
-     * @param {string} query - The given query.
-     * @param {number} startIdx - The search start index.
-     * @returns {number}
-     */
-    const findLastEntryIdx = (words, query, startIdx = 0) => {
-      let stopIdx = words.length - 1;
-      let middle = Math.floor((stopIdx + startIdx) / 2);
-      const queryLowCase = query.toLowerCase();
-        
-      while(startIdx <= stopIdx) {
-        const substringLowCase = words[middle].toLowerCase().slice(0, query.length);
-        if (substringLowCase > queryLowCase) stopIdx = middle - 1;
+        if (isFirst && substringLowCase >= queryLowCase) stopIdx = middle - 1;
+        else if (!isFirst && substringLowCase > queryLowCase) stopIdx = middle - 1;
         else startIdx = middle + 1;
         middle = Math.floor((stopIdx + startIdx) / 2);
       }
       return ++middle;
     };
 
-    const fistEntryIdx = findFirstEntryIdx(words, query);
-    const lastEntryIdx = findLastEntryIdx(words, query, fistEntryIdx);
+    const fistEntryIdx = findEntryIdx(words, query, true);
+    const lastEntryIdx = findEntryIdx(words, query, false);
     const result = words.slice(fistEntryIdx, lastEntryIdx);
 
     prevQuery = query;
