@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "@types/jsdom": "^16.2.14",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "eslint": "^8.6.0",
+    "form-data": "^3.0.1",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.2",
+    "xhr-mock": "^2.5.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=15.14.0"
+  }
+}
