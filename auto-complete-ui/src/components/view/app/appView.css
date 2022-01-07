@@ -1,28 +1,26 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
+.container {
   display: flex;
   align-items: center;
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.header {
-  margin-bottom: 10px;
+.container * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.title {
+.autocomplete__title {
   margin: 10px 0;
   font-size: 24px;
+  font-weight: bold;
   text-align: center;
 }
 
-.input {
+.autocomplete__input {
   width: min(320px, 95vw);
+  margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
   border: 2px solid #ddd;
@@ -30,7 +28,7 @@ body {
   outline: none;
 }
 
-.list {
+.autocomplete__list {
   width: min(320px, 95vw);
   height: 400px;
   padding-right: 10px;
@@ -39,7 +37,7 @@ body {
   overflow-y: auto;
 }
 
-.item {
+.autocomplete__item {
   margin-bottom: 5px;
   padding: 5px 10px;
   border-radius: 3px;
