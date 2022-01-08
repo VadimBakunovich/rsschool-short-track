@@ -1,19 +1,13 @@
 import { appView } from './view/app/appView';
 import { resultsView } from './view/resultsView';
 
-type innerFunc = (query: string) => string[];
-export type outerFunc = (data: string[]) => innerFunc;
+export type func = (query: string) => string[];
 
-export function app(
-  container: HTMLElement,
-  createAutoComplete: outerFunc,
-  data: string[]
-  ) {
+export function app(container: HTMLElement, autoComplete: func) {
   appView(container);
 
   const input: HTMLInputElement = container.querySelector('.autocomplete__input');
   const resultsList: HTMLUListElement = container.querySelector('.autocomplete__list');
-  const autoComplete = createAutoComplete(data);
   let results: string[] = [];
 
   input.oninput = () => {
