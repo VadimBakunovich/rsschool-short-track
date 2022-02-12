@@ -146,23 +146,19 @@ class CustomLodash {
     return obj;
   }
 
-  omit(obj, keys) {
+  omit_pick(obj, keys, isPick) {
     const resultObj = {};
-    if (typeof keys === 'string') keys = [keys];
-    for (const key in obj) {
+    const iterable = isPick ? keys : Object.keys(obj);
+    for (const key of iterable) {
       if (!this.includes(keys, key)) resultObj[key] = obj[key];
+      else if (isPick) resultObj[key] = obj[key];
     }
     return resultObj;
   }
 
-  pick(obj, keys) {
-    const resultObj = {};
-    if (typeof keys === 'string') keys = [keys];
-    for (const key of keys) {
-      resultObj[key] = obj[key];
-    }
-    return resultObj;
-  }
+  omit = (obj, keys) => this.omit_pick(obj, keys, false);
+
+  pick = (obj, keys) => this.omit_pick(obj, keys, true);
 
   omitBy_pickBy(obj, predicate = identity, isOmitBy) {
     const resultObj = {};
