@@ -163,11 +163,9 @@ class CustomLodash {
   omitBy_pickBy(obj, predicate = identity, isOmitBy) {
     const resultObj = {};
     for (const key in obj) {
-      if (!predicate(obj[key], key) && isOmitBy) {
-        resultObj[key] = obj[key];
-      } else if (predicate(obj[key], key) && !isOmitBy) {
-        resultObj[key] = obj[key];
-      }
+      let result = predicate(obj[key], key);
+      if (isOmitBy) result = !result;
+      if (result) resultObj[key] = obj[key];
     }
     return resultObj;
   }
