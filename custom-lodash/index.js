@@ -21,13 +21,7 @@ class CustomLodash {
     return chunks;
   }
 
-  compact(arr) {
-    const resultArr = [];
-    for (const el of arr) {
-      if (el) this.arrPush(resultArr, el);
-    }
-    return resultArr;
-  }
+  compact = arr => this.filter(arr, el => el);
 
   drop(arr, n = 1) {
     if (n < 0) n = 0;
