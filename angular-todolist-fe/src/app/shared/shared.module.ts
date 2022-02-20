@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TodoComponent } from './todo/todo.component';
 import { ToUpperCasePipe } from './pipes/to-upper-case.pipe';
 import { StyleDirective } from './directives/style.directive';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
