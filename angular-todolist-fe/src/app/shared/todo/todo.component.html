@@ -1,0 +1,65 @@
+<li
+  class="todo-item"
+  [appStyle]="todo.completed"
+>
+  <input
+    #checkbox
+    type="checkbox"
+    class="completion-checkbox"
+    (change)="onComplete.emit([todo, checkbox])"
+    [checked]="todo.completed"
+    [disabled]="!input.disabled"
+  >
+  <input
+    #input
+    class="todo-title"
+    (input)="input.value"
+    [value]="input.disabled ? '' : todo.title"
+    [placeholder]="input.disabled ? (todo.title | toUpperCase) : ''"
+    disabled
+  >
+  <div
+    class="block-btn"
+    *ngIf="input.disabled; else editBlock"
+  >
+    <button
+      #btnEdit
+      @fadeAnimation
+      class="btn-edit"
+      (click)="input.disabled = false; input.focus()"
+      [disabled]="todo.completed"
+      [title]="btnEdit.disabled ? 'You cannot edit completed tasks' : 'Click to edit the task'"
+    ></button>
+    <button
+      @fadeAnimation
+      class="btn-delete"
+      (click)="onDelete.emit(todo.id)"
+      title="Click to delete the task"
+    ></button>
+  </div>
+  <ng-template #editBlock>
+    <div class="block-btn">
+      <button
+        @fadeAnimation
+        class="btn-save"
+        title="Click to save changes"
+        *ngIf="input.value.length > 0; else btnDel"
+        (click)="onEdit.emit([todo, input])"
+      ></button>
+      <ng-template #btnDel>
+        <button
+          @fadeAnimation
+          class="btn-delete"
+          (click)="onDelete.emit(todo.id)"
+          title="Click to delete the task"
+        ></button>
+      </ng-template>
+      <button
+        @fadeAnimation
+        class="btn-cancel"
+        title="Click to undo changes"
+        (click)="input.disabled = true; input.value = todo.title"
+      ></button>
+    </div>
+  </ng-template>
+</li>

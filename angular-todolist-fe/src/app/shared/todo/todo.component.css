@@ -1,0 +1,107 @@
+.todo-item {
+  margin-bottom: 12px;
+  padding: 15px 10px 15px 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  transition: .3s;
+}
+
+.completion-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-title {
+  margin: 0 15px;
+  padding: 10px;
+  font-size: 16px;
+  width: 80%;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: #fff;
+  outline: none;
+  transition: .3s;
+}
+
+.todo-title:focus {
+  border: 1px solid #66acdb;
+}
+
+.todo-title:disabled {
+  color: black;
+  background-color: inherit;
+}
+
+.todo-title::placeholder {
+  color: black;
+}
+
+.block-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+button {
+  width: 42px;
+  height: 42px;
+  margin: 0 6px;
+  border-radius: 3px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  box-shadow: 1px 1px 3px black;
+}
+
+button:active {
+  box-shadow: initial;
+}
+
+button:disabled {
+  background-color: #c3c3c3;
+  filter: initial;
+  opacity: 0.4;
+  cursor: initial;
+}
+
+.btn-edit {
+  background-color: #66acdb;
+  background-image: url('./assets/edit.svg');
+}
+
+.btn-delete {
+  background-color: #FF6F61;
+  background-image: url('./assets/delete.svg');
+  background-size: 80%;
+}
+
+.btn-save {
+  background-color: #00A170;
+  background-image: url('./assets/save.svg');
+}
+
+.btn-cancel {
+  background-color: #FDAC53;
+  background-image: url('./assets/cancel.svg');
+}
+
+@media (max-width: 767px) {
+  .todo-item {
+    padding: 10px 6px 10px 10px;
+    margin-bottom: 10px;
+  }
+
+  .todo-title {
+    margin: 0 10px;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 32px;
+    height: 32px;
+    margin: 0 4px;
+  }
+}
