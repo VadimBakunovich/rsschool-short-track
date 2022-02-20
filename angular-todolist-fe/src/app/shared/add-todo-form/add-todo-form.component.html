@@ -1,0 +1,17 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onAdd.emit(form)"
+>
+  <input
+    type="text"
+    formControlName="todoTitle"
+    placeholder="Type something..."
+  >
+  <button
+    type="submit"
+    [disabled]="form.invalid"
+    [title]="form.valid ? 'Click to add a task' : 'You should type something'"
+  >
+    +
+  </button>
+</form>
