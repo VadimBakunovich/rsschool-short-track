@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: .3s;
+  outline: none;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
