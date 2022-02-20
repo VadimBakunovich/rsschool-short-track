@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Todo } from '../share/models';
+import { Todo } from '../shared/models';
 
 @Injectable()
 export class HttpService {
