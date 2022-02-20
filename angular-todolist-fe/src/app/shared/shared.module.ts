@@ -5,6 +5,7 @@ import { ToUpperCasePipe } from './pipes/to-upper-case.pipe';
 import { StyleDirective } from './directives/style.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   exports: [
     TodoComponent,
     AddTodoFormComponent
   ]
 })
-export class ShareModule { }
+export class SharedModule {}
