@@ -20,9 +20,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     ReactiveFormsModule
   ],
   providers: [FeedService],
-  exports: [
-    TodoListComponent,
-    AddTodoFormComponent
-  ]
+  exports: [TodoListComponent]
 })
 export class FeedModule {}
