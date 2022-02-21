@@ -20,4 +20,8 @@ export class AddTodoFormComponent implements OnInit {
       ])
     });
   }
+
+  addTodo() {
+    this.onAdd.emit(this.form);
+  }
 }

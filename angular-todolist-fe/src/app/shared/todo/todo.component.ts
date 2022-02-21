@@ -15,7 +15,7 @@ export class TodoComponent {
 
   @Output() onEdit = new EventEmitter<[Todo, HTMLInputElement]>();
 
-  @Output() onDelete = new EventEmitter<number>();
+  @Output() onDelete = new EventEmitter<Todo>();
 
   @Output() onComplete = new EventEmitter<[Todo, HTMLInputElement]>();
 

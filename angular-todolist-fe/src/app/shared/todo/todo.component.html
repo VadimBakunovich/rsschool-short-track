@@ -33,7 +33,7 @@
     <button
       @fadeAnimation
       class="btn-delete"
-      (click)="onDelete.emit(todo.id)"
+      (click)="onDelete.emit(todo)"
       title="Click to delete the task"
     ></button>
   </div>
@@ -50,7 +50,7 @@
         <button
           @fadeAnimation
           class="btn-delete"
-          (click)="onDelete.emit(todo.id)"
+          (click)="onDelete.emit(todo)"
           title="Click to delete the task"
         ></button>
       </ng-template>

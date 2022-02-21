@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { TodoComponent } from './todo/todo.component';
 import { ToUpperCasePipe } from './pipes/to-upper-case.pipe';
 import { StyleDirective } from './directives/style.directive';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AddTodoFormComponent } from './add-todo-form/add-todo-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     TodoComponent,
     StyleDirective,
     ToUpperCasePipe,
-    AddTodoFormComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  exports: [
-    TodoComponent,
-    AddTodoFormComponent
-  ]
+  exports: [TodoComponent]
 })
 export class SharedModule {}

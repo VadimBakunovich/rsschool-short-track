@@ -1,0 +1,20 @@
+<div class="container">
+  <app-add-todo-form
+    (onAdd)="addTask($event)"
+  ></app-add-todo-form>
+  <ul
+    class="todo-list"
+    *ngIf="todos.length; else noTasks"
+  >
+    <app-todo
+      *ngFor="let t of todos"
+      [todo]="t"
+      (onComplete)="completeTask($event)"
+      (onEdit)="editTask($event)"
+      (onDelete)="deleteTask($event)"
+    ></app-todo>
+  </ul>
+  <ng-template #noTasks>
+    <p class="no-todos">There are no tasks in the list...</p>
+  </ng-template>
+</div>

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpService } from './http.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { ChangeIdInterceptor } from './changeID.interceptor';
-import { changeUrlInterceptor } from './changeURL.interceptor';
+import { ChangeUrlInterceptor } from './changeURL.interceptor';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,7 @@ import { changeUrlInterceptor } from './changeURL.interceptor';
     HttpService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: changeUrlInterceptor,
+      useClass: ChangeUrlInterceptor,
       multi: true
     },
     {
