@@ -7,6 +7,7 @@ import jsonstream from 'jsonstream';
 import { TodoModel } from './models';
 import { Todo } from './interfaces';
 import { paginationHandler } from './utils';
+import { httpErrorHandler } from './errorHandlers';
 
 const { PORT, MONGO_DB } = process.env;
 const app = express();
@@ -19,7 +20,7 @@ app.get('/todos/:id', (req, res) => {
   TodoModel
     .findById(req.params.id)
     .then(todo => todo ? res.send(todo) : res.status(404).send('Task not found'))
-    .catch((err: MongooseError) => console.error(err));
+    .catch((err: MongooseError) => httpErrorHandler(err, req, res));
 });
 
 app.get('/todos', (req, res) => {
@@ -29,30 +30,30 @@ app.get('/todos', (req, res) => {
       .cursor()
       .pipe(jsonstream.stringify())
       .pipe(res)
-  } catch(err) { console.error(err); }
+  } catch(err) { httpErrorHandler(err as MongooseError, req, res); }
 });
 
 app.post('/todos', (req, res) => {
   new TodoModel(req.body).save()
     .then(todo => res.send(todo))
-    .catch((err: MongooseError) => console.error(err));
+    .catch((err: MongooseError) => httpErrorHandler(err, req, res));
 });
 
 app.patch('/todos/:id', (req, res) => {
   TodoModel
     .findByIdAndUpdate(req.params.id, req.body as Todo, { new: true })
     .then(todo => res.send(todo))
-    .catch((err: MongooseError) => console.error(err));
+    .catch((err: MongooseError) => httpErrorHandler(err, req, res));
 });
 
 app.delete('/todos/:id', (req, res) => {
   TodoModel
     .findByIdAndDelete(req.params.id)
     .then(todo => res.send(todo))
-    .catch((err: MongooseError) => console.error(err));
+    .catch((err: MongooseError) => httpErrorHandler(err, req, res));
 });
 
-app.all('*', (req, res) => console.error('Bad request'));
+app.all('*', (req, res) => httpErrorHandler(null, req, res));
 
 connect(MONGO_DB)
   .then(() => app.listen(PORT, () => console.log(`Server is running on: http://localhost:${PORT}`)))
