@@ -45,6 +45,15 @@ app.patch('/todos/:id', (req, res) => {
     .catch((err: MongooseError) => console.error(err));
 });
 
+app.delete('/todos/:id', (req, res) => {
+  TodoModel
+    .findByIdAndDelete(req.params.id)
+    .then(todo => res.send(todo))
+    .catch((err: MongooseError) => console.error(err));
+});
+
+app.all('*', (req, res) => console.error('Bad request'));
+
 connect(MONGO_DB)
   .then(() => app.listen(PORT, () => console.log(`Server is running on: http://localhost:${PORT}`)))
   .catch((err: MongooseError) => {
